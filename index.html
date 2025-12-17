@@ -1,234 +1,71 @@
 <!doctype html>
 <html lang="en">
+
+
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Kai Morales — Portfolio</title>
-  <meta name="description" content="Academic portfolio of Kai Morales — projects, research, publications, and contact." />
-  
-  <!-- Simple, print‑friendly, no frameworks. Accessible and fast. -->
-  <style>
-    :root{
-      /* Golden‑ratio based type scale */
-      --base: 1rem;           /* 16px */
-      --phi: 1.618;           /* golden ratio */
-      --s-1: calc(var(--base) / var(--phi));
-      --s0: var(--base);
-      --s1: calc(var(--base) * var(--phi));
-      --s2: calc(var(--s1) * var(--phi));
-      --s3: calc(var(--s2) * var(--phi));
+  <meta name="viewport" content="width=device-width, initial-scale=2" />
+  <title>Kai Morales</title>
+  <meta name="description" content="Kai Morales Portfolio" />
 
-      --measure: 60ch;        /* comfortable line length */
-      --page: 72rem;          /* max page width */
-
-      --ink: #111;            /* text */
-      --paper: #fff;          /* background */
-      --muted: #555;          /* secondary text */
-      --rule: #ddd;           /* section rules */
-      --link: #0b3d91;        /* subtle academic blue */
-    }
-
-    html { font-size: 16px; }
-    body {
-      margin: 0;
-      font-family: "Times New Roman", Times, serif;
-      line-height: 1.5;
-      color: var(--ink);
-      background: var(--paper);
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-    }
-
-    .wrap { max-width: var(--page); margin-inline: auto; padding: calc(var(--s1)); }
-
-    header {
-      display: grid;
-      grid-template-columns: 160px 1fr;
-      gap: var(--s1);
-      align-items: center;
-      margin-bottom: var(--s2);
-      border-bottom: 1px solid var(--rule);
-      padding-bottom: var(--s1);
-    }
-
-    .photo {
-      width: 160px; aspect-ratio: 1/1; object-fit: cover; border: 1px solid var(--rule);
-    }
-
-    h1 { font-size: var(--s3); line-height: 1.1; margin: 0; }
-    h2 { font-size: var(--s2); line-height: 1.15; margin: var(--s2) 0 var(--s-1); }
-    h3 { font-size: var(--s1); line-height: 1.2; margin: var(--s1) 0 var(--s-1); }
-
-    p, li { font-size: var(--s0); max-width: var(--measure); }
-
-    nav { margin-top: var(--s-1); }
-    nav a { margin-right: var(--s-1); text-decoration: none; color: var(--link); }
-    nav a:hover, a:focus { text-decoration: underline; }
-
-    section { padding-block: var(--s1); border-bottom: 1px solid var(--rule); }
-
-    .two-col {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: var(--s1);
-    }
-
-    ul { padding-left: 1.1em; }
-    .meta { color: var(--muted); font-style: italic; }
-
-    a { color: var(--link); }
-    a:visited { color: #153e75; }
-
-    /* Compact list headers */
-    .item { margin-bottom: var(--s1); }
-    .item h3 { margin-bottom: 0; }
-    .item .meta { margin-top: 0.15rem; }
-
-    footer { padding-block: var(--s1); font-size: var(--s-1); color: var(--muted); }
-
-    /* Print styles */
-    @media print {
-      nav, .print-hide { display: none !important; }
-      .wrap { padding: 0; }
-      a { color: inherit; text-decoration: none; }
-      section { page-break-inside: avoid; }
-    }
-
-    /* Small screens */
-    @media (max-width: 720px){
-      header { grid-template-columns: 1fr; text-align: left; }
-      .photo { width: 128px; }
-      .two-col { grid-template-columns: 1fr; }
-    }
-  </style>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 
-<body itemscope itemtype="https://schema.org/Person">
-  <div class="wrap">
-    <header>
-      <!-- Square photo keeps the bare‑bones vibe; replace src with your image path -->
-      <img class="photo" src="pics.png" alt="Portrait of Kai Morales" itemprop="image" />
-      <div>
-        <h1 itemprop="name">Kai Morales</h1>
-        <p class="meta">
-          Undergraduate · University of Pittsburgh · B.S. Data Science
-        </p>
-        <nav aria-label="Primary">
-          <a href="#about">About</a>
-          <a href="#projects">Projects</a>
-          <a href="#experience">Experience</a>
-          <a href="#education">Education</a>
-          <a href="#contact">Contact</a>
-        </nav>
-      </div>
-    </header>
+<body>
+  <main class="page">
+    <h1>Kai Morales</h1>
 
-    <main>
-      <section id="about">
-        <h2>About</h2>
-        <p itemprop="description">
-          I’m a college student focused on data science and applied machine learning. I like
-          shipping open-source tools—especially in sports analytics or anything competitive.
-        </p>
-      </section>
+    <p class="intro">
+      undergraduate at the
+      <a href="https://www.pitt.edu" target="_blank" rel="noreferrer">university of pittsburgh</a>.
+    </p>
 
-      <section id="projects">
-        <h2>Projects</h2>
-        <div class="item">
-          <h3>CFB Rank — College Football Ranking Algorithm</h3>
-          <p class="meta">Aug 2025 – Present · <a href="https://cfbrank.org">cfbrank.org</a></p>
-          <p>
-            Developed a Python-based college football ranking algorithm that replaces 
-            subjective AP/Coaches poll voting with a quantitative framework using the 
-            CFBD API, pandas, and data-driven weighting. The model achieved results that outperform 
-            legacy polls in predictive validity — accurately flagging over-ranked teams like Texas and Penn State 
-            before their Week 6 losses to unranked opponents.         
-          </p>
-        </div>
-        <div class="item">
-          <h3>ClearFit — AI Resume Analyzer</h3>
-          <p class="meta">Mar 2025 – Aug 2025 · <a href="https://clearfit.tech">clearfit.tech</a></p>
-          <p>
-            Full‑stack app that delivers structured, no‑fluff resume feedback aligned to a job post. Implemented
-            auth, payments, and secure uploads; kept a private instance to control API costs.
-          </p>
-        </div>
-        <div class="item">
-          <h3>MNIST Digit Classifier (PyTorch)</h3>
-          <p class="meta">PyTorch · simple CNN</p>
-          <p>
-            Built a modular neural network in PyTorch to classify handwritten digits (0–9), 
-            achieving ~98% accuracy on the MNIST dataset. Implemented clean data loaders, 
-            training loops, dropout regularization, and model persistence for reproducibility.
-          </p>
-        </div>
-      </section>
+    <h2>Currently</h2>
+    <ul class="xp">
+      <li>
+        <span class="role">Data Science intern @</span>
+        <span class="meta">
+          <a href="https://mybrandi.ai" target="_blank" rel="noreferrer">Brandi AI</a>
+        </span>
+      </li>
+      <li>
+        <span class="role">Analytics intern @</span>
+        <span class="meta">
+          <a href="https://pittsburghpanthers.com/sports/football" target="_blank" rel="noreferrer">Pitt Football</a>
+        </span>
+      </li>
+    </ul>
 
-      <section id="experience">
-        <h2>Experience</h2>
-        <div class="two-col">
-          <div class="item">
-            <h3>AI Research Intern — FACET Lab</h3>
-            <p class="meta">University of Pittsburgh · Sep 2025 – Present</p>
-            <ul>
-              <li>Contribute to BRIDGE (NSF) building inclusive AI/AR tools for deaf learners in collaborative STEM.</li>
-              <li>Backend services for Unity (C#): data models and real‑time pipelines for sign detection and overlays.</li>
-              <li>Prototype real‑time ASL recognition (CV + basic NLP) with on‑device feedback in Unity.</li>
-            </ul>
-          </div>
-          <div class="item">
-            <h3>Data Analytics Intern — The Pitt News</h3>
-            <p class="meta">Sep 2025 – Present</p>
-            <ul>
-              <li>Launched a GA4‑backed analytics dashboard used weekly by 25+ editors/marketers.</li>
-              <li>Added plain‑English explainers and next‑steps, cutting time‑to‑insight from ~20m to ~6–8m.</li>
-              <li>Recommendations on send times/headlines contributed to ~22% CTR lift on optimized campaigns.</li>
-            </ul>
-          </div>
-          <div class="item">
-            <h3>ML Robotics Operator — Stealth Startup ($4.5 Billion)</h3>
-            <p class="meta">Dec 2024 – Present</p>
-            <ul>
-              <li>Operate & troubleshoot AI robotics systems to accelerate model‑training pipelines.</li>
-              <li>Developed a more efficient physical task‑reset method (~20% faster training cycle).</li>
-              <li>Document anomalies and collaborate with engineers to improve behavior and accuracy.</li>
-            </ul>
-          </div>
-        </div>
-      </section>
+    <h2>Projects</h2>
+    <ul class="bullets">
+      <li>
+        <a href="https://cfbrank.org" target="_blank" rel="noreferrer">cfbrank.org</a> —
+        a quantitative college football ranking model.
+      </li>
+      <li>
+        <a href="https://clearfit.tech" target="_blank" rel="noreferrer">clearfit.tech</a> —
+        a resume analysis tool focused on structured, job-relevant feedback.
+      </li>
+    </ul>
 
-      <section id="education">
-        <h2>Education</h2>
-        <p>
-          <strong>University of Pittsburgh</strong> — B.S. Data Science (Minors: Computer Science & Applied Statistics), expected May 2028
-        </p>
-        <p class="meta">Relevant coursework: Intermediate Programming; Data Structures & Algorithms; Data Science; Assembly & Computer Organization; Calculus; Matrices & Linear Algebra; Applied Statistical Methods; Discrete Mathematics.</p>
-      </section>
+    <h2>Recent</h2>
+    <ul class="bullets">
+      <li>
+        <mark>Nov 2025</mark> —
+        <a href="https://www.linkedin.com/posts/kaimorales_this-week-i-won-1st-place-at-the-claude-ai-activity-7396375793318244352-30bt?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEMrPEIBHK7k82kVzlIKfjvFgfvzFFsu1ps"
+           target="_blank" rel="noreferrer">won</a>
+        1st place at the claude ai hackathon hosted by
+        <a href="https://www.anthropic.com/" target="_blank" rel="noreferrer">Anthropic</a>.
+      </li>
+    </ul>
 
-      <section id="skills">
-        <h2>Skills</h2>
-        <p class="meta">Python, Java, R, PyTorch, pandas, scikit‑learn, SQL, Linux, HTML/CSS, Firebase, GA4, Tableau, Markdown.</p>
-      </section>
-
-      <section id="contact">
-        <h2>Contact</h2>
-        <p>
-          <a href="mailto:kaimor06@gmail.com" itemprop="email">kaimor06@gmail.com</a> ·
-          <a href="tel:+12028052836" itemprop="telephone">202‑805‑2836</a> ·
-          <a href="https://linkedin.com/in/kaimorales" itemprop="sameAs">LinkedIn</a> ·
-          <a href="https://github.com/kaimorales" itemprop="url">Github</a>
-        </p>
-      </section>
-    </main>
-
-    <footer>
-      <p>© <span id="year"></span> Kai Morales · Last updated Oct 5, 2025</p>
-    </footer>
-  </div>
-
-  <script>
-    // unobtrusive little touch to keep the footer current
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
+    <h2>Links</h2>
+    <ul class="links">
+      <li><a href="https://www.linkedin.com/in/kaimorales" target="_blank" rel="noreferrer">linkedin</a></li>
+      <li><a href="mailto:kaimor06@gmail.com">mail</a></li>
+      <li><a href="https://github.com/kaimorales" target="_blank" rel="noreferrer">github</a></li>
+      <li><a href="exp.html" target="_blank" rel="noreferrer">previous roles</a></li>
+    </ul>
+  </main>
 </body>
 </html>
