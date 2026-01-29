@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects — Kai Morales</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  
+  <body>
+    <div class="wrapper">
+      <div class="container">
+        
+        <!-- Sidebar Navigation -->
+        <div class="sidebar">
+          <header>
+            <h1>kai morales</h1>
+          </header>
+          <nav>
+            <ul>
+              <li><a href="index.html">Home</a></li>
+              <li><a href="about.html">About</a></li>
+              <li><a href="projects.html" class="active">Projects</a></li>
+              <li><a href="exp.html">Experience</a></li>
+              <li><a href="thoughts.html">Thoughts</a></li>
+              <li><a href="contact.html">Contact</a></li>
+            </ul>
+          </nav>
+        </div>
+
+        <!-- Main Content - Scrollable -->
+        <main class="page-content full-height">
+          <h2 class="page-title">Projects</h2>
+
+          <div class="exp-list">
+            
+            <section class="exp-item">
+              <h3 class="collapsible" onclick="toggleExp('cfbrank')">
+                <span class="collapse-icon" id="cfbrank-icon">+</span> 
+                <a href="https://cfbrank.org" target="_blank" rel="noopener noreferrer">cfbrank.org</a>
+              </h3>
+              <div id="cfbrank" class="exp-details">
+                <p>A novel quantitative college football ranking model. Built with Python, deployed on the web.</p>
+              </div>
+            </section>
+
+            <section class="exp-item">
+              <h3 class="collapsible" onclick="toggleExp('clearfit')">
+                <span class="collapse-icon" id="clearfit-icon">+</span> 
+                <a href="https://clearfit.tech" target="_blank" rel="noopener noreferrer">clearfit.tech</a>
+              </h3>
+              <div id="clearfit" class="exp-details">
+                <p>Resume analysis tool with structured feedback. OpenAI API + Firebase backend. SaaS.</p>
+              </div>
+            </section>
+
+            <section class="exp-item">
+              <h3 class="collapsible" onclick="toggleExp('nullified')">
+                <span class="collapse-icon" id="nullified-icon">+</span> 
+                <a href="https://github.com/kaimorales/NullifiedINT" target="_blank" rel="noopener noreferrer">Nullified INT</a>
+              </h3>
+              <div id="nullified" class="exp-details">
+                <p>Applied Mann-Whitney U tests and bootstrapping to NFL play-by-play data to identify statistical outliers in quarterback performance.</p>
+              </div>
+            </section>
+
+            <section class="exp-item">
+              <h3 class="collapsible" onclick="toggleExp('hackathon')">
+                <span class="collapse-icon" id="hackathon-icon">+</span> 
+                Claude AI Hackathon Winner
+              </h3>
+              <div id="hackathon" class="exp-details">
+                <p>1st place (Nov 2024). Football play-design app for low budget programs.</p>
+              </div>
+            </section>
+
+          </div>
+        </main>
+        
+      </div>
+    </div>
+
+    <script>
+      function toggleExp(id) {
+        const content = document.getElementById(id);
+        const icon = document.getElementById(id + '-icon');
+        if (content.style.display === 'none' || content.style.display === '') {
+          content.style.display = 'block';
+          icon.textContent = '−';
+        } else {
+          content.style.display = 'none';
+          icon.textContent = '+';
+        }
+      }
+    </script>
+  </body>
+</html>

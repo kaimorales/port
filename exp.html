@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Experience — Kai Morales</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  
+  <body>
+    <div class="wrapper">
+      <div class="container">
+        
+        <!-- Sidebar Navigation -->
+        <div class="sidebar">
+          <header>
+            <h1>kai morales</h1>
+          </header>
+          <nav>
+            <ul>
+              <li><a href="index.html">Home</a></li>
+              <li><a href="about.html">About</a></li>
+              <li><a href="projects.html">Projects</a></li>
+              <li><a href="exp.html" class="active">Experience</a></li>
+              <li><a href="thoughts.html">Thoughts</a></li>
+              <li><a href="contact.html">Contact</a></li>
+            </ul>
+          </nav>
+        </div>
+
+        <!-- Main Content - Scrollable -->
+        <main class="page-content full-height">
+          <h2 class="page-title">Experience</h2>
+
+          <div class="exp-list">
+            
+            <section class="exp-item">
+              <h3 class="collapsible" onclick="toggleExp('ppg')">
+                <span class="collapse-icon" id="ppg-icon">+</span> 
+                Data Science Intern @ PPG Industries
+              </h3>
+              <div id="ppg" class="exp-details">
+                <p>Incoming Summer 2026</p>
+              </div>
+            </section>
+
+            <section class="exp-item">
+              <h3 class="collapsible" onclick="toggleExp('brandi')">
+                <span class="collapse-icon" id="brandi-icon">+</span> 
+                Data Science Intern @ Brandi AI
+              </h3>
+              <div id="brandi" class="exp-details">
+                <p>DS for LLMs. Jan 2026 – Present</p>
+              </div>
+            </section>
+
+            <section class="exp-item">
+              <h3 class="collapsible" onclick="toggleExp('pitt')">
+                <span class="collapse-icon" id="pitt-icon">+</span> 
+                Analytics Intern @ Pitt Football
+              </h3>
+              <div id="pitt" class="exp-details">
+                <p>Personnel matchups, EPA metrics. Jan 2026 – Present</p>
+              </div>
+            </section>
+
+            <section class="exp-item">
+              <h3 class="collapsible" onclick="toggleExp('lrdc')">
+                <span class="collapse-icon" id="lrdc-icon">+</span> 
+                Research Intern @ LRDC
+              </h3>
+              <div id="lrdc" class="exp-details">
+                <p>Backend dev for NSF-funded AR lab. Sep–Dec 2025</p>
+              </div>
+            </section>
+
+            <section class="exp-item">
+              <h3 class="collapsible" onclick="toggleExp('tpn')">
+                <span class="collapse-icon" id="tpn-icon">+</span> 
+                Data Analytics Intern @ The Pitt News
+              </h3>
+              <div id="tpn" class="exp-details">
+                <p>Marketing analytics. Sep–Dec 2025</p>
+              </div>
+            </section>
+
+            <section class="exp-item">
+              <h3 class="collapsible" onclick="toggleExp('skild')">
+                <span class="collapse-icon" id="skild-icon">+</span> 
+                ML Robotics Operator @ Stealth Startup (nda-signed)
+              </h3>
+              <div id="skild" class="exp-details">
+                <p>Robot operations for ML training data. Dec 2024-Nov 2025</p>
+              </div>
+            </section>
+
+          </div>
+        </main>
+        
+      </div>
+    </div>
+
+    <script>
+      function toggleExp(id) {
+        const content = document.getElementById(id);
+        const icon = document.getElementById(id + '-icon');
+        if (content.style.display === 'none' || content.style.display === '') {
+          content.style.display = 'block';
+          icon.textContent = '−';
+        } else {
+          content.style.display = 'none';
+          icon.textContent = '+';
+        }
+      }
+    </script>
+  </body>
+</html>
