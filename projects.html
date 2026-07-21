@@ -12,24 +12,26 @@
 </head>
 <body>
 
-  <header class="nav">
-    <a class="wordmark" href="/">kai morales</a>
-    <nav class="nav-links">
-      <a href="/">home</a>
-      <a href="/projects.html" aria-current="page">projects</a>
-      <a href="/writing.html">writing</a>
-      <a href="/about.html">about</a>
-    </nav>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="wordmark" href="/">kai morales</a>
+      <nav>
+        <a href="/experience.html">experience</a>
+        <a href="/projects.html" aria-current="page">projects</a>
+        <a href="/writing.html">writing</a>
+        <a href="/about.html">about</a>
+      </nav>
+    </div>
   </header>
 
   <main class="page">
 
-    <header class="page-head fade">
+    <header class="page-head reveal">
       <h1 class="page-title">projects</h1>
       <p class="page-lede">Things I've built — mostly at the intersection of AI, health, and sports.</p>
     </header>
 
-    <div class="projects fade">
+    <div class="projects reveal">
 
       <article class="project">
         <div class="project-head">
@@ -44,6 +46,7 @@
           moves their own physiology, not the average person's. Won Conway's Best AI for
           Decision Support Award at Carnegie Mellon.
         </p>
+        <div class="tags"><span>python</span><span>changepoint detection</span><span>RAG</span><span>wearables</span></div>
       </article>
 
       <article class="project">
@@ -56,6 +59,7 @@
           polls. It flagged mismatches the AP missed, ranking teams on performance rather
           than reputation.
         </p>
+        <div class="tags"><span>python</span><span>ranking model</span><span>sports analytics</span></div>
       </article>
 
       <article class="project">
@@ -67,6 +71,7 @@
           A distributed LLM inference network — pooling compute across machines to run
           large models.
         </p>
+        <div class="tags"><span>distributed systems</span><span>llm inference</span></div>
       </article>
 
       <article class="project">
@@ -79,16 +84,14 @@
           with built-in defensive coverages — making advanced game planning accessible to
           programs with smaller budgets.
         </p>
+        <div class="tags"><span>web app</span><span>football</span></div>
       </article>
 
     </div>
 
-    <footer class="contact fade">
-      <a href="https://www.linkedin.com/in/kaimorales" target="_blank" rel="noopener noreferrer">linkedin</a>
-      <a href="https://github.com/kaimorales" target="_blank" rel="noopener noreferrer">github</a>
-      <a href="mailto:kai@harlen.ai">email</a>
-    </footer>
-
   </main>
+
+  <footer><div class="footer-inner">&copy; 2026 kai morales</div></footer>
+  <script src="app.js"></script>
 </body>
 </html>
