@@ -1,6 +1,6 @@
 /* ==========================================================
    Kai Morales — kmurakami.com
-   Light, Geist, confident. Centered hub · quiet blue accent.
+   Light, Geist, confident. Single-page scroll · quiet blue accent.
    ========================================================== */
 
 :root {
@@ -78,7 +78,8 @@ a { color: inherit; text-decoration: none; }
   transition: color 0.18s var(--ease);
 }
 .topbar nav a:hover { color: var(--ink); }
-.topbar nav a[aria-current="page"] { color: var(--ink); }
+.topbar nav a[aria-current="page"],
+.topbar nav a.active { color: var(--ink); }
 
 /* ---------- page ---------- */
 
@@ -89,7 +90,7 @@ a { color: inherit; text-decoration: none; }
 .head {
   text-align: center;
   padding-top: clamp(56px, 11vh, 108px);
-  margin-bottom: 66px;
+  margin-bottom: 84px;
 }
 .avatar {
   width: 104px;
@@ -107,10 +108,12 @@ a { color: inherit; text-decoration: none; }
   line-height: 1.04;
   color: var(--ink);
 }
-.head .tag {
-  margin-top: 14px;
-  font-size: 15px;
+.head .intro {
+  margin: 16px auto 0;
+  max-width: 62ch;
+  font-size: 15.5px;
   font-weight: 300;
+  line-height: 1.7;
   color: var(--muted);
 }
 
@@ -130,34 +133,21 @@ a { color: inherit; text-decoration: none; }
 }
 .social a:hover svg { fill: var(--ink); transform: translateY(-2px); }
 
-/* ---------- hub rows (home) ---------- */
+/* ---------- sections (one-page) ---------- */
 
-.hub { border-top: 1px solid var(--line); }
-.hub-row {
-  display: flex;
-  align-items: baseline;
-  gap: 18px;
-  padding: 26px 4px;
-  border-bottom: 1px solid var(--line);
-  color: inherit;
+.section {
+  padding-top: 8px;
+  margin-bottom: 88px;
 }
-.hub-title {
-  font-size: 20px;
-  font-weight: 400;
-  letter-spacing: -0.015em;
-  color: var(--ink);
-  transition: color 0.18s var(--ease);
+.section:last-of-type { margin-bottom: 24px; }
+
+/* section rule + mono label, doubles as scroll anchor offset */
+.section > .label {
+  padding-top: 22px;
+  border-top: 1px solid var(--line);
+  scroll-margin-top: 80px;
 }
-.hub-desc { font-size: 14px; font-weight: 300; color: var(--muted); }
-.hub-arrow {
-  margin-left: auto;
-  align-self: center;
-  font-size: 17px;
-  color: var(--faint);
-  transition: color 0.2s var(--ease), transform 0.2s var(--ease);
-}
-.hub-row:hover .hub-title { color: var(--accent); }
-.hub-row:hover .hub-arrow { color: var(--accent); transform: translateX(5px); }
+.section { scroll-margin-top: 80px; }
 
 /* ---------- inner page header ---------- */
 
@@ -184,15 +174,23 @@ a { color: inherit; text-decoration: none; }
 
 /* ---------- experience ---------- */
 
-.cols { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 56px; align-items: start; }
-.col { min-width: 0; }
-
-.block { margin-bottom: 56px; }
-.cols .block { margin-bottom: 0; }
+.block { margin-bottom: 46px; }
+.block:last-child { margin-bottom: 0; }
 
 .label {
   display: block;
-  margin-bottom: 20px;
+  margin-bottom: 34px;
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+.sublabel {
+  display: block;
+  margin-bottom: 16px;
   font-family: var(--mono);
   font-size: 11px;
   font-weight: 400;
@@ -232,7 +230,7 @@ a.entry:hover .org { color: var(--accent); }
   padding: 30px 0;
   border-top: 1px solid var(--line);
 }
-.project:first-child { border-top: none; padding-top: 4px; }
+.project:first-child { border-top: none; padding-top: 0; }
 
 .project-head {
   display: flex;
@@ -334,10 +332,10 @@ footer {
 
 @media (max-width: 560px) {
   :root { --pad: 22px; }
-  .head { margin-bottom: 48px; }
+  .head { margin-bottom: 56px; }
+  .topbar nav { gap: 16px; }
   .avatar { width: 92px; height: 92px; }
-  .cols { grid-template-columns: 1fr; gap: 48px; }
-  .hub-row { padding: 22px 2px; }
+  .section { margin-bottom: 64px; }
   .entry { flex-direction: column; align-items: flex-start; gap: 2px; }
   .project-head { flex-wrap: wrap; gap: 6px; }
   .project-tag { margin-left: 0; }
@@ -351,5 +349,5 @@ footer {
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .reveal { opacity: 1; transform: none; transition: none; }
-  .social a:hover svg, .hub-row:hover .hub-arrow { transform: none; }
+  .social a:hover svg { transform: none; }
 }

@@ -13,3 +13,26 @@ if (bar) {
   onScroll();
   window.addEventListener('scroll', onScroll, { passive: true });
 }
+
+// mark the nav link for whichever section you're in
+const spy = document.querySelector('#spy');
+if (spy) {
+  const links = [...spy.querySelectorAll('a[href^="#"]')];
+  const sections = links
+    .map((a) => document.querySelector(a.getAttribute('href')))
+    .filter(Boolean);
+
+  if (sections.length) {
+    const setActive = () => {
+      const line = window.scrollY + window.innerHeight * 0.35;
+      let current = null;
+      sections.forEach((sec) => { if (sec.offsetTop <= line) current = sec; });
+      links.forEach((a) => {
+        a.classList.toggle('active', current && a.getAttribute('href') === '#' + current.id);
+      });
+    };
+    setActive();
+    window.addEventListener('scroll', setActive, { passive: true });
+    window.addEventListener('resize', setActive);
+  }
+}
