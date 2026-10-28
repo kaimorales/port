@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Pit wall · Kai Morales</title>
+  <meta name="description" content="Twenty-four laps. One stop. A small experiment in race strategy, changing weather, and optimization by Kai Morales.">
+  <link rel="canonical" href="https://kmurakami.com/pit-wall.html">
+  <link rel="stylesheet" href="styles.css?v=3">
+  <link rel="stylesheet" href="pit-wall.css?v=1">
+</head>
+<body>
+<a class="skip-link" href="#content">Skip to content</a>
+<main id="content" class="pit-page" tabindex="-1">
+  <header class="pit-header"><a href="index.html">← Kai Morales</a><span>a small experiment in optimization</span></header>
+  <div class="pit-intro"><div><h1>Pit wall<span>.</span></h1><p>Twenty-four laps. One stop. Your call.</p></div><span class="checkered" aria-hidden="true"></span></div>
+  <noscript><p class="no-script">This experiment needs JavaScript to run the race. You can still read how the model works below.</p></noscript>
+  <div id="load-error" class="no-script" hidden>The race couldn’t load. Please refresh the page to try again.</div>
+  <div class="race-layout">
+    <section class="race-view" tabindex="-1" aria-label="Race visualization">
+      <div class="race-top"><span id="race-state" class="race-state">READY ON THE GRID</span><span id="lap-count">LAP — / 24</span></div>
+      <svg id="circuit" viewBox="0 0 600 360" role="img" aria-label="Fictional Bellwether circuit. Your car is green; the optimized car is orange.">
+        <defs><pattern id="rain-pattern" width="23" height="27" patternUnits="userSpaceOnUse" patternTransform="rotate(22)"><line x1="4" y1="1" x2="4" y2="9" stroke="#688da7" stroke-width="1"/></pattern></defs>
+        <path class="contour" d="M424 331C513 335 575 278 564 198L551 106C544 47 486 21 423 41L303 75C257 87 248 29 191 35C132 41 125 98 80 125C21 161 34 230 85 253L177 293C220 314 234 230 278 251L349 308Q380 331 424 331Z"/>
+        <defs><path id="race-line" d="M425 287C486 290 531 254 524 204L513 117C508 77 473 60 433 75L312 111C255 129 250 65 198 73C158 79 157 127 112 151C75 172 75 202 112 218L185 249C217 264 232 187 276 204L370 270Q390 287 425 287Z"/></defs>
+        <use href="#race-line" class="road-base"/>
+        <use href="#race-line" class="road-inner"/>
+        <use href="#race-line" class="road-center"/>
+        <path class="pit-lane" d="M351 260L366 306Q395 321 451 306L470 282"/>
+        <rect x="394" y="306" width="20" height="9" rx="1" class="pit-box"/>
+        <text x="401" y="342" class="map-label" text-anchor="middle">PIT LANE · +20s</text>
+        <path d="M426 276L426 298" stroke="#fff" stroke-width="5"/>
+        <path d="M426 277L426 297" stroke="#777" stroke-width="3" stroke-dasharray="3 3"/>
+        <text x="297" y="164" text-anchor="middle" class="circuit-name">Bellwether</text>
+        <text x="297" y="182" text-anchor="middle" class="map-label">A FICTIONAL CIRCUIT</text>
+        <text x="490" y="54" class="sector-label">01</text><text x="89" y="113" class="sector-label">02</text><text x="208" y="294" class="sector-label">03</text>
+        <rect id="rain-overlay" width="600" height="360" fill="url(#rain-pattern)" opacity="0" pointer-events="none"/>
+        <g id="ghost-car" class="car ghost"><rect x="-9" y="-5" width="18" height="10" rx="3"/><path d="M-5-8V8M6-8V8"/><rect class="cockpit" x="-2" y="-2" width="5" height="4" rx="1"/></g>
+        <g id="your-car" class="car yours"><rect x="-9" y="-5" width="18" height="10" rx="3"/><path d="M-5-8V8M6-8V8"/><rect class="cockpit" x="-2" y="-2" width="5" height="4" rx="1"/></g>
+      </svg>
+      <div class="timing"><div><span class="driver-name"><i class="dot yours-dot"></i>You</span><strong id="your-time">—</strong><span id="your-tire">Medium</span></div><div><span class="driver-name"><i class="dot ghost-dot"></i>Optimal</span><strong id="ghost-time">—</strong><span id="ghost-tire">Revealed at the flag</span></div></div>
+      <div class="radio"><span>ON THE RADIO</span><p id="radio-message">We have one stop. Make it count.</p></div>
+      <div class="playback" id="playback" hidden><button id="pause-race" type="button">Pause</button><label class="sr-only" for="race-progress">Race replay position</label><input id="race-progress" type="range" min="0" max="1000" value="0"><button id="finish-race" type="button">See finish ↗</button></div>
+    </section>
+    <form id="strategy-form" class="strategy-panel">
+      <div class="panel-heading"><h2>Your strategy</h2><span>ONE STOP</span></div>
+      <fieldset class="tire-picker"><legend>Start on</legend><div class="tire-options" id="starting-tires">
+        <label><input type="radio" name="start" value="soft"><span class="tire-token soft">S</span><span>Soft</span></label>
+        <label><input type="radio" name="start" value="medium" checked><span class="tire-token medium">M</span><span>Medium</span></label>
+        <label><input type="radio" name="start" value="hard"><span class="tire-token hard">H</span><span>Hard</span></label>
+        <label><input type="radio" name="start" value="inter"><span class="tire-token inter">I</span><span>Inter</span></label>
+      </div></fieldset>
+      <div class="pit-control"><label for="pit-lap">Pit at the end of lap <output id="pit-value" for="pit-lap">12</output></label><input id="pit-lap" type="range" min="1" max="23" value="12"><div class="range-ends"><span>1</span><span>23</span></div></div>
+      <fieldset class="tire-picker"><legend>Switch to</legend><div class="tire-options">
+        <label><input type="radio" name="finish" value="soft"><span class="tire-token soft">S</span><span>Soft</span></label>
+        <label><input type="radio" name="finish" value="medium"><span class="tire-token medium">M</span><span>Medium</span></label>
+        <label><input type="radio" name="finish" value="hard" checked><span class="tire-token hard">H</span><span>Hard</span></label>
+        <label><input type="radio" name="finish" value="inter"><span class="tire-token inter">I</span><span>Inter</span></label>
+      </div></fieldset>
+      <div class="weather-control"><label for="weather">The forecast</label><select id="weather"><option value="rain">Rain moves in</option><option value="dry">Dry all race</option></select><div id="rain-control"><label for="rain-lap">Rain starts on lap <output id="rain-value" for="rain-lap">17</output></label><input id="rain-lap" type="range" min="1" max="24" value="17"></div><div id="weather-strip" class="weather-strip" aria-hidden="true"></div><div class="range-ends"><span>START</span><span id="forecast-end">WET FINISH</span></div></div>
+      <button id="run-race" class="run-button" type="submit" disabled>Loading race…</button><p class="strategy-hint">Soft is fast. Hard lasts. Intermediates need rain.</p>
+    </form>
+  </div>
+  <section class="debrief" id="debrief" hidden aria-labelledby="result-heading">
+    <div class="result-heading"><div><p class="eyebrow">THE CHEQUERED FLAG</p><h2 id="result-heading" tabindex="-1"></h2></div><button id="try-best" type="button">Try the optimal strategy ↗</button></div>
+    <p id="result-explanation" class="result-explanation"></p>
+    <div class="landscape-header"><h3>The roads not taken</h3><span id="landscape-caption"></span></div>
+    <p class="landscape-intro">Every square is a different pit call. Darker green is faster. Pick one to race it.</p>
+    <div class="landscape-scroll"><div class="landscape" id="landscape" aria-label="Strategy comparison"></div></div>
+    <div class="landscape-legend"><span>Pit at the end of lap →</span><span><i></i> faster <b>·</b> ○ your call <b>·</b> ★ best in this grid</span></div>
+  </section>
+  <p id="announcement" class="sr-only" role="status" aria-live="polite"></p>
+  <details class="model-notes"><summary>What’s under the hood?</summary><div><p>A little exercise in how a good decision depends on its assumptions. Both cars get the same forecast, the same pace model, and exactly one stop. The orange car exhaustively checks all 368 combinations of tire choices and pit laps. It knows when the rain will arrive.</p><p>Fresh softs are quickest; wear grows with the square of tire age. Hard tires trade speed for durability. Rain builds over three laps, slows slicks, and makes intermediates useful. A stop costs 20 seconds. Tires change after that lap. There’s no overtaking penalty, traffic, safety car, randomness, or live racing data.</p><p>This is a deliberately simplified model, not an F1 prediction. “Optimal” means fastest within these rules. Change the forecast and the answer can change.</p><p><a href="pit-model.mjs">Read the model ↗</a></p></div></details>
+  <footer class="pit-footer"><a href="index.html">Made by Kai Morales</a><span>Built for the “what if?”</span></footer>
+</main>
+<script type="module" src="pit-wall.mjs"></script>
+</body>
+</html>
