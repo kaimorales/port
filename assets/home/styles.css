@@ -1,0 +1,72 @@
+/* The tree becomes this quiet, usable page. */
+.home { --home-green: #365c3e; }
+.home-page { max-width: 640px; margin: 0 auto; padding: 46px 38px 32px; }
+.home-painting-frame { height: 162px; overflow: hidden; border-radius: 1px; }
+/* Keep a little crop room even on narrow screens, and anchor the view to the ground. */
+.home-painting { display: block; width: 100%; height: calc(100% + 24px); object-fit: cover; object-position: center bottom; transform: translateY(-24px); }
+.home-introduction { margin: 24px 0 26px; }
+.home-identity { padding: 10px 0 4px; position: relative; z-index: 1; }
+.home-identity h1 { font-size: 32px; letter-spacing: -.9px; margin-bottom: 10px; }
+.home-role { font-size: 14px; color: var(--body); }
+.home-interests { font-size: 15px; line-height: 1.75; margin-top: 14px; color: var(--body); }
+.home-nav { display: flex; flex-wrap: wrap; gap: 0 17px; margin-top: 17px; max-width: none; }
+.home-nav a { font-size: 13px; display: inline-flex; align-items: center; min-height: 34px; }
+.home button { border: 0; border-radius: 0; background: none; cursor: pointer; font-family: var(--reading); }
+.home button:focus-visible, .home input:focus-visible { outline: 1px solid var(--home-green); outline-offset: 5px; }
+.home [hidden] { display: none !important; }
+.home-conversation { position: relative; }
+.chat-meta { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; margin-top: 8px; }
+.chat-info { color: var(--muted); font: 10px/1.7 var(--utility); }
+.chat-info summary { cursor: pointer; list-style: none; padding: 7px 0; }
+.chat-info summary::-webkit-details-marker { display: none; }
+.chat-info summary:hover { color: var(--ink); }
+.chat-info summary:focus-visible { outline: 1px solid var(--home-green); outline-offset: 3px; }
+.chat-info p { max-width: 45ch; font-size: 11px; padding: 5px 0 12px; }
+#start-over { color: var(--muted); font-size: 11px; padding: 7px 0 7px 12px; flex-shrink: 0; }
+.question-line { display: flex; align-items: center; border-bottom: 1px solid #bdc6b7; transition: border-color 180ms; }
+.question-line:focus-within { border-color: var(--home-green); }
+.question-line input { width: 100%; min-width: 0; border: 0; outline: none; background: transparent; color: var(--ink); font: 15px/1.6 var(--reading); padding: 13px 4px 13px 0; border-radius: 0; }
+.question-line input::placeholder { color: #81877b; opacity: 1; }
+.question-line input:focus-visible { outline: none; }
+.question-send { width: 44px; height: 46px; flex-shrink: 0; padding: 12px; color: var(--home-green); }
+.question-send svg { display: block; fill: none; stroke: currentColor; stroke-width: 1.3; }
+.question-send:hover { color: #152f1e; }
+.question-send:disabled { opacity: .4; cursor: wait; }
+.reply-status { font: italic 13px/1.6 var(--reading); color: var(--muted); }
+.reply-status:empty { display: none; }
+.reply-status:not(:empty) { padding-top: 20px; }
+.home-answer { padding-top: 20px; max-width: 65ch; animation: answer-in 220ms ease-out; }
+.answer-question { color: var(--muted); font: italic 13px/1.6 var(--reading); margin-bottom: 12px; overflow-wrap: anywhere; }
+.answer-text { font: 15px/1.85 var(--reading); color: var(--ink); overflow-wrap: anywhere; }
+.answer-text + .answer-text { margin-top: 12px; }
+.preview-note { font: 10px/1.7 var(--utility); letter-spacing: .1px; color: #73796e; margin-top: 17px; }
+.home-footer { margin-top: 26px; }
+.home-footer .social { gap: 12px; }
+.visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
+@keyframes answer-in { from { opacity: 0; } to { opacity: 1; } }
+@media (min-width: 900px) {
+  .home-page { padding-top: 64px; }
+  .home-introduction { margin-top: 26px; margin-bottom: 26px; }
+  .home-identity h1 { font-size: 35px; }
+}
+@media (max-width: 480px) {
+  .home-page { padding: 28px 25px 28px; }
+  .home-painting-frame { height: 125px; }
+  .home-introduction { margin-top: 24px; margin-bottom: 24px; }
+  .home-identity { padding: 0; }
+  .home-identity h1 { font-size: 27px; }
+  .home-role { font-size: 12px; max-width: 180px; }
+  .home-interests { font-size: 13px; margin-top: 12px; }
+  .home-nav { gap: 0 14px; margin-top: 12px; }
+  .home-nav a { font-size: 12px; min-height: 38px; }
+  .question-line input { font-size: 16px; }
+  .home-footer { margin-top: 22px; }
+}
+@media (max-width: 350px) {
+  .home-page { padding-right: 20px; padding-left: 20px; }
+  .home-interests { max-width: 280px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .question-line { transition: none; }
+  .home-answer { animation: none; }
+}

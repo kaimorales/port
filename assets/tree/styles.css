@@ -1,0 +1,18 @@
+.morph-pending .home-page { opacity: 0; }
+.morph-pending .home-page { animation: morph-fail-open 0s 5s forwards; }
+@keyframes morph-fail-open { to { opacity: 1; } }
+.morph-active { overflow: hidden; }
+.tree-morph {
+  position: fixed; inset: 0; width: 100%; height: 100%;
+  max-width: none; max-height: none; margin: 0; padding: 0; border: 0;
+  background: white; overflow: hidden;
+}
+.tree-morph::backdrop { background: transparent; }
+.tree-morph canvas { display: block; width: 100%; height: 100%; }
+.tree-morph.is-resolving { background: transparent; }
+.morph-skip { position: absolute; right: 24px; bottom: 18px; padding: 12px; color: #687064; font: 11px/1.5 Georgia, serif; transition: opacity 300ms ease; }
+.tree-morph.is-resolving .morph-skip { opacity: 0; pointer-events: none; }
+@media (prefers-reduced-motion: reduce) {
+  .morph-pending .home-page { opacity: 1; animation: none; }
+  .morph-skip { transition: none; }
+}
