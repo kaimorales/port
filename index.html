@@ -18,7 +18,8 @@
   <script>
     try {
       const redirectsToSection = ['#projects', '#experience', '#about', '#contact'].includes(location.hash);
-      if (!redirectsToSection && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      const isRefresh = performance.getEntriesByType('navigation')[0]?.type === 'reload';
+      if (isRefresh && !redirectsToSection && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
         document.documentElement.classList.add('morph-pending');
         setTimeout(() => document.documentElement.classList.remove('morph-pending'), 5000);
       }
