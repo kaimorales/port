@@ -12,7 +12,7 @@
   <meta property="og:description" content="Kai Morales, Applied AI Intern at Tesla. Interested in AI eng, evals, and optimization.">
   <meta property="og:url" content="https://kmurakami.com/">
   <meta property="og:image" content="https://kmurakami.com/banner.jpg">
-  <link rel="stylesheet" href="styles.css?v=3">
+  <link rel="stylesheet" href="styles.css?v=4">
 </head>
 <body>
   <a class="skip-link" href="#content">Skip to content</a>
@@ -29,6 +29,26 @@
         <a href="contact.html">contact</a>
         <a href="driving-school.html">game</a>
       </nav>
+      <section class="chat-section" aria-labelledby="chat-heading">
+        <h2 id="chat-heading">ask about kai</h2>
+        <form id="question-form">
+          <label class="visually-hidden" for="question">Ask a question about Kai</label>
+          <div class="question-line">
+            <input id="question" name="question" type="text" placeholder="ask about me…" maxlength="600" autocomplete="off" required aria-describedby="chat-disclosure">
+            <button type="submit">ask</button>
+          </div>
+        </form>
+        <div class="chat-meta">
+          <details>
+            <summary>gpt-6-luna · answers can be off</summary>
+            <p id="chat-disclosure">Answers use information Kai supplied and can be wrong. Your question and recent conversation are sent to OpenAI. This site doesn't save the conversation. Please leave out anything private.</p>
+          </details>
+          <button id="start-over" type="button" hidden>clear</button>
+        </div>
+        <p id="reply-status" class="reply-status" role="status"></p>
+        <div id="answer" class="chat-answer" aria-live="polite" aria-atomic="true" hidden></div>
+        <noscript><p class="chat-note">Chat needs JavaScript. The links above still work.</p></noscript>
+      </section>
     </main>
     <footer class="footer">
       <nav class="social" aria-label="Social profiles">
@@ -39,5 +59,6 @@
     </footer>
   </div>
   <script src="app.js?v=3" defer></script>
+  <script type="module" src="assets/chat/home.mjs"></script>
 </body>
 </html>
