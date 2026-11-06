@@ -12,47 +12,68 @@ class Page(HTMLParser):
         super().__init__(convert_charrefs=True)
         self.refs, self.ids, self.headings, self.main_links = [], set(), [], []
         self.main_text, self.main_count, self.in_main = [], 0, False
+        self.template_depth = 0
+        self.routes, self.hash_routes = set(), set()
         self.lang = None
         self.feed(file.read_text())
 
     def handle_starttag(self, tag, attrs):
         attrs = dict(attrs)
+        for key in ('src', 'href'):
+            if attrs.get(key):
+                self.refs.append(attrs[key])
+        if attrs.get('id'):
+            self.ids.add(attrs['id'])
+        if attrs.get('href', '').startswith('#/'):
+            self.hash_routes.add(attrs['href'][2:])
+        if tag == 'template':
+            self.template_depth += 1
+            self.routes.add(attrs.get('data-route', ''))
+            return
+        if self.template_depth:
+            return
         if tag == 'html':
             self.lang = attrs.get('lang')
         if tag == 'main':
             self.main_count += 1
             self.in_main = True
-        if attrs.get('id'):
-            self.ids.add(attrs['id'])
         if tag == 'h1':
             self.headings.append(tag)
-        for key in ('src', 'href'):
-            if attrs.get(key):
-                self.refs.append(attrs[key])
         if tag == 'a' and self.in_main and attrs.get('href'):
             self.main_links.append(attrs['href'])
 
     def handle_endtag(self, tag):
+        if tag == 'template':
+            self.template_depth -= 1
+            return
+        if self.template_depth:
+            return
         if tag == 'main':
             self.in_main = False
 
     def handle_data(self, data):
-        if self.in_main:
+        if self.in_main and not self.template_depth:
             self.main_text.append(data)
 
 
 class SiteTests(unittest.TestCase):
-    def test_home_opens_independent_sections(self):
+    def test_home_has_static_section_fallbacks(self):
         home = Page(ROOT / 'index.html')
-        for name in ('projects', 'experience', 'about', 'contact'):
+        for name in ('projects', 'experience', 'about'):
             with self.subTest(section=name):
                 self.assertIn(f'{name}.html', home.main_links,
-                              'Sections must open real pages without JavaScript')
+                              'The no-JavaScript fallback must open the static section')
                 target = ROOT / f'{name}.html'
                 self.assertTrue(target.is_file())
                 section = Page(target)
                 self.assertEqual(section.main_count, 1)
                 self.assertGreater(len(' '.join(section.main_text).strip()), 40)
+
+    def test_shared_navigation_routes_have_content(self):
+        home = Page(ROOT / 'index.html')
+        self.assertTrue(home.hash_routes)
+        self.assertTrue(home.hash_routes.issubset(home.routes))
+        self.assertTrue({'', 'experience', 'projects', 'about'}.issubset(home.routes))
 
     def test_project_index_opens_six_detail_pages(self):
         index = Page(ROOT / 'projects.html')
@@ -78,7 +99,7 @@ class SiteTests(unittest.TestCase):
                         target /= 'index.html'
                     self.assertTrue(target.is_relative_to(ROOT), 'Local URLs must stay portable')
                     self.assertTrue(target.is_file(), f'Missing local target: {ref}')
-                    if url.fragment and target.suffix == '.html':
+                    if url.fragment and not url.fragment.startswith('/') and target.suffix == '.html':
                         self.assertIn(unquote(url.fragment), Page(target).ids)
 
     def test_every_page_has_a_single_named_main_view(self):

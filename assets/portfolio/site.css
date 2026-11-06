@@ -1,0 +1,109 @@
+/* Shared typography, page layouts, links, and social icons. Homepage styles live in assets/home/. */
+:root {
+  color-scheme: light;
+  --paper: #fff;
+  --ink: #30332f;
+  --body: #4d524b;
+  --muted: #687064;
+  --link: #375b8a;
+  --line: #efefed;
+  --reading: Georgia, "Times New Roman", serif;
+  --utility: Arial, Helvetica, sans-serif;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font: 400 15px/1.8 var(--reading);
+  -webkit-font-smoothing: antialiased;
+}
+a { color: var(--link); text-decoration-thickness: 1px; text-underline-offset: 4px; }
+a:hover { color: #1e3350; }
+a:focus-visible { outline: 2px solid var(--link); outline-offset: 5px; }
+::selection { background: #e6ecdf; color: var(--ink); }
+.page { max-width: 562px; margin: 0 auto; padding: 58px 36px 50px; }
+h1 { margin: 0 0 15px; font: 400 29px/1.25 var(--reading); letter-spacing: -.8px; }
+p { margin: 0; }
+.back-nav { margin-bottom: 32px; }
+.back-nav a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 30px;
+  color: var(--muted);
+  font: 400 13px/1.7 var(--utility);
+  text-decoration: none;
+}
+.back-nav a:hover { color: var(--link); text-decoration: underline; }
+.meta { color: var(--muted); font: 400 12px/1.7 var(--utility); }
+.prose { margin-top: 32px; }
+.prose p { color: var(--body); line-height: 1.85; margin-bottom: 20px; }
+.prose p:last-child { margin-bottom: 0; }
+.email { overflow-wrap: anywhere; }
+.project-list { list-style: none; margin: 30px 0 0; padding: 0; }
+.project-link {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 16px;
+  align-items: center;
+  min-height: 48px;
+  padding: 16px 0;
+  text-decoration: none;
+}
+.project-name { text-decoration: underline; text-decoration-color: #b4c2d1; text-underline-offset: 4px; }
+.project-link:hover .project-name { text-decoration-color: currentColor; }
+.project-note { color: var(--muted); font: 400 11.5px/1.6 var(--utility); text-align: right; }
+.prose .project-tools { margin-top: 26px; color: var(--muted); font: 400 12px/1.8 var(--utility); }
+.prose .project-action { margin-top: 26px; }
+.project-action a { display: inline-flex; align-items: center; min-height: 34px; font-size: 14px; }
+.facts { margin: 24px 0; padding-left: 19px; color: var(--body); font: 400 13px/1.9 var(--utility); }
+.experience-list { margin: 30px 0 0; padding: 0; list-style: none; }
+.experience-entry { padding: 17px 0; border-bottom: 1px solid var(--line); }
+.experience-entry:first-child { padding-top: 0; }
+.experience-entry:last-child { border: 0; }
+.experience-heading { display: flex; justify-content: space-between; align-items: baseline; gap: 8px 18px; }
+.experience-heading h2 { margin: 0; font: 400 16px/1.5 var(--reading); }
+.experience-heading h2 a { color: var(--ink); text-decoration: none; }
+.experience-heading h2 a:hover { color: var(--link); text-decoration: underline; }
+.experience-heading .meta { flex-shrink: 0; }
+.role { color: var(--body); font: 400 13px/1.7 var(--utility); margin-top: 3px; }
+.description { color: var(--muted); font: 400 12px/1.7 var(--utility); margin-top: 3px; }
+.footer { margin-top: 43px; }
+.social { display: flex; gap: 13px; margin-left: -6px; }
+.social a {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 32px;
+  color: var(--body);
+  text-decoration: none;
+}
+.social a:hover { color: var(--ink); }
+.social svg { width: 16px; height: 16px; fill: currentColor; }
+.x-mark { font: 400 18px/1 var(--utility); }
+.skip-link {
+  position: absolute;
+  top: 8px;
+  left: 12px;
+  padding: 6px 10px;
+  background: var(--paper);
+  transform: translateY(-160%);
+  font: 400 13px/1.7 var(--utility);
+}
+.skip-link:focus { transform: none; }
+@media (max-width: 480px) {
+  .page { padding: 40px 26px 32px; }
+  .back-nav a, .project-action a { min-height: 44px; }
+  .project-link { grid-template-columns: 1fr; gap: 3px; }
+  .project-note { text-align: left; }
+  .experience-heading { flex-direction: column; gap: 2px; }
+  .footer { margin-top: 31px; }
+  .social { gap: 6px; }
+  .social a { width: 44px; height: 44px; }
+}
+@media (pointer: coarse) {
+  .back-nav a, .project-action a { min-height: 44px; }
+  .social a { width: 44px; height: 44px; }
+}
