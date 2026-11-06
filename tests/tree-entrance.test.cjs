@@ -3,12 +3,12 @@ const assert = require('node:assert/strict');
 const { readFileSync } = require('node:fs');
 const { runInNewContext } = require('node:vm');
 
-function visit(gate, { navigationType = 'navigate', reduced = false, hash = '' } = {}) {
+function visit(gate, { navigationType = 'navigate', referrer = '', reduced = false, hash = '' } = {}) {
   const classes = new Set();
   let release;
   runInNewContext(gate, {
-    document: { documentElement: { classList: { add: c => classes.add(c), remove: c => classes.delete(c) } } },
-    location: { hash },
+    document: { referrer, documentElement: { classList: { add: c => classes.add(c), remove: c => classes.delete(c) } } },
+    location: { hash, hostname: 'kmurakami.com' }, URL,
     performance: { getEntriesByType: () => navigationType ? [{ type: navigationType }] : [] },
     matchMedia: () => ({ matches: reduced }),
     setTimeout: callback => { release = callback; },
@@ -27,10 +27,12 @@ test(`${file}: refresh animates, but failed loading releases the homepage`, () =
   assert.equal(result.classes.size, 0);
 });
 
-test(`${file}: arriving from another page or browser history opens directly`, () => {
-  for (const navigationType of ['navigate', 'back_forward', null]) {
-    assert.equal(visit(gate, { navigationType }).classes.size, 0);
-  }
+test(`${file}: direct visits and search arrivals animate`, () => {
+  for (const referrer of ['', 'https://www.google.com/']) assert.ok(visit(gate, { referrer }).classes.has(pending));
+});
+
+test(`${file}: returning from the site or browser history opens directly`, () => {
+  for (const options of [{ referrer: 'https://kmurakami.com/projects.html' }, { referrer: 'https://www.kmurakami.com/about.html' }, { navigationType: 'back_forward' }]) assert.equal(visit(gate, options).classes.size, 0);
 });
 
 test(`${file}: reduced motion and legacy section redirects open directly`, () => {
