@@ -1,4 +1,4 @@
-import {preset,makeTrack,pointAt,nearest,randomWeights,reshapeTrack,INPUTS,HIDDEN,PARAMS,PHYSICS_VERSION} from './drive-core.mjs';
+import {preset,makeTrack,pointAt,nearest,randomWeights,reshapeTrack,INPUTS,HIDDEN,PARAMS,PHYSICS_VERSION} from './core.mjs';
 const $=id=>document.getElementById(id), canvas=$('drive-canvas'),ctx=canvas.getContext('2d');
 const reduced=matchMedia('(prefers-reduced-motion: reduce)');
 const colors=['#536e81','#727b82','#61795f','#876f62'];
@@ -151,7 +151,7 @@ function boot(weights,{keepSession=false,message='The starter knows the basics. 
  pause();worker?.terminate();const token=++epoch;ready=false;busy=false;view=null;followed=null;hovered=null;$('follow-driver').value='';error();
  if(!keepSession){round=0;initial=null;best=null;archive=[];}
  controls();stats();updateFollow();draw();status('PREPARING DRIVER');
- currentWeights=weights.slice();worker=new Worker(new URL('./drive-worker.mjs',import.meta.url),{type:'module'});
+ currentWeights=weights.slice();worker=new Worker(new URL('./worker.mjs',import.meta.url),{type:'module'});
  worker.onerror=()=>{if(token!==epoch)return;pause();ready=false;controls();error('The training worker could not start. Refresh to try again.');};
  worker.onmessage=({data})=>{
   if(token!==epoch)return;
@@ -218,7 +218,7 @@ canvas.addEventListener('pointercancel',()=>{pointer=null;stroke=[];draw();});
 canvas.addEventListener('keydown',e=>{if(!drawing)return;if(e.key==='Escape'){e.preventDefault();cancelDrawing();return;}if(e.key==='Enter'){e.preventDefault();finishDrawing();return;}const d={ArrowUp:[0,-12],ArrowDown:[0,12],ArrowLeft:[-12,0],ArrowRight:[12,0]}[e.key];if(!d)return;e.preventDefault();if(!stroke.length)stroke=[{...cursor}];cursor={x:Math.max(25,Math.min(695,cursor.x+d[0])),y:Math.max(25,Math.min(435,cursor.y+d[1]))};stroke.push({...cursor});draw();});
 document.addEventListener('visibilitychange',()=>{if(document.hidden)pause();});
 reduced.addEventListener('change',()=>{pause();if(view&&!view.done&&reduced.matches){view.time=Infinity;finishRound();}});
-fetch('driving-seed.json').then(r=>{if(!r.ok)throw Error('The pretrained driver could not load.');return r.json();}).then(data=>{if(data.physicsVersion!==PHYSICS_VERSION||data.architecture?.[0]!==INPUTS||data.architecture?.[1]!==HIDDEN||data.architecture?.[2]!==2||!Array.isArray(data.weights)||data.weights.length!==PARAMS||data.weights.some(v=>!Number.isFinite(v)))throw Error('The driver model is out of date. Refresh to load the latest version.');model=data;boot(starter());}).catch(e=>error(e.message));
+fetch(new URL('./seed.json', import.meta.url)).then(r=>{if(!r.ok)throw Error('The pretrained driver could not load.');return r.json();}).then(data=>{if(data.physicsVersion!==PHYSICS_VERSION||data.architecture?.[0]!==INPUTS||data.architecture?.[1]!==HIDDEN||data.architecture?.[2]!==2||!Array.isArray(data.weights)||data.weights.length!==PARAMS||data.weights.some(v=>!Number.isFinite(v)))throw Error('The driver model is out of date. Refresh to load the latest version.');model=data;boot(starter());}).catch(e=>error(e.message));
 
 // Keep the secondary controls easy to dismiss without adding more buttons.
 document.addEventListener('pointerdown',e=>{const options=$('options');if(options.open&&!options.contains(e.target))options.open=false;});

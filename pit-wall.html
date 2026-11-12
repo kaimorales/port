@@ -7,8 +7,8 @@
   <title>Pit wall · Kai Morales</title>
   <meta name="description" content="Twenty-four laps. One stop. A small experiment in race strategy, changing weather, and optimization by Kai Morales.">
   <link rel="canonical" href="https://kmurakami.com/pit-wall.html">
-  <link rel="stylesheet" href="styles.css?v=3">
-  <link rel="stylesheet" href="pit-wall.css?v=1">
+  <link rel="stylesheet" href="assets/site/styles.css?v=3">
+  <link rel="stylesheet" href="assets/pit-wall/styles.css?v=1">
 </head>
 <body>
 <a class="skip-link" href="#content">Skip to content</a>
@@ -71,9 +71,9 @@
     <div class="landscape-legend"><span>Pit at the end of lap →</span><span><i></i> faster <b>·</b> ○ your call <b>·</b> ★ best in this grid</span></div>
   </section>
   <p id="announcement" class="sr-only" role="status" aria-live="polite"></p>
-  <details class="model-notes"><summary>What’s under the hood?</summary><div><p>A little exercise in how a good decision depends on its assumptions. Both cars get the same forecast, the same pace model, and exactly one stop. The orange car exhaustively checks all 368 combinations of tire choices and pit laps. It knows when the rain will arrive.</p><p>Fresh softs are quickest; wear grows with the square of tire age. Hard tires trade speed for durability. Rain builds over three laps, slows slicks, and makes intermediates useful. A stop costs 20 seconds. Tires change after that lap. There’s no overtaking penalty, traffic, safety car, randomness, or live racing data.</p><p>This is a deliberately simplified model, not an F1 prediction. “Optimal” means fastest within these rules. Change the forecast and the answer can change.</p><p><a href="pit-model.mjs">Read the model ↗</a></p></div></details>
+  <details class="model-notes"><summary>What’s under the hood?</summary><div><p>A little exercise in how a good decision depends on its assumptions. Both cars get the same forecast, the same pace model, and exactly one stop. The orange car exhaustively checks all 368 combinations of tire choices and pit laps. It knows when the rain will arrive.</p><p>Fresh softs are quickest; wear grows with the square of tire age. Hard tires trade speed for durability. Rain builds over three laps, slows slicks, and makes intermediates useful. A stop costs 20 seconds. Tires change after that lap. There’s no overtaking penalty, traffic, safety car, randomness, or live racing data.</p><p>This is a deliberately simplified model, not an F1 prediction. “Optimal” means fastest within these rules. Change the forecast and the answer can change.</p><p><a href="assets/pit-wall/model.mjs">Read the model ↗</a></p></div></details>
   <footer class="pit-footer"><a href="index.html">Made by Kai Morales</a><span>Built for the “what if?”</span></footer>
 </main>
-<script type="module" src="pit-wall.mjs"></script>
+<script type="module" src="assets/pit-wall/main.mjs"></script>
 </body>
 </html>

@@ -1,5 +1,10 @@
 __pycache__/
 *.py[cod]
 .DS_Store
+.env
+.env.*
+!.env.example
+.vercel/
+node_modules/
 
-driving-training/training-data.json
+tools/driving/training-data.json

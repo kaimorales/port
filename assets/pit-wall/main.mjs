@@ -1,5 +1,5 @@
 // The interface is separate from the deterministic, independently tested model.
-import('./pit-model.mjs').then(({TIRES,LAPS,simulate,solve,progress,wetness}) => {
+import('./model.mjs').then(({TIRES,LAPS,simulate,solve,progress,wetness}) => {
   const $=id=>document.getElementById(id);
   const form=$('strategy-form');
   const line=$('race-line');

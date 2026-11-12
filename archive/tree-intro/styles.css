@@ -1,0 +1,53 @@
+/* An ink-and-character tree, isolated from the site's shared page styles. */
+.intro-pending .page { opacity: 0; animation: tree-fail-open 0s 3s forwards; }
+@keyframes tree-fail-open { to { opacity: 1; } }
+.tree-intro {
+  position: fixed;
+  inset: 0;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  background: white;
+  color: #687064;
+  opacity: 1;
+  transition: background-color 600ms ease;
+}
+.tree-intro[open] { display: grid; place-content: center; justify-items: center; }
+.tree-intro::backdrop { background: transparent; }
+.tree-intro.is-dispersing { background-color: rgb(255 255 255 / 0); }
+.tree-intro.is-dispersing .tree-skip { opacity: 0; }
+.tree-intro canvas { display: block; width: min(560px, 92vw, calc((100svh - 86px) * 1.105)); height: auto; aspect-ratio: 588 / 532; }
+.tree-skip {
+  border: 0;
+  background: none;
+  color: #8c9287;
+  font: 11px/1.5 Georgia, serif;
+  padding: 12px 20px;
+  margin-top: 12px;
+  cursor: pointer;
+  transition: opacity 150ms ease;
+}
+.tree-skip:hover { color: #454a40; }
+.tree-skip:focus-visible, .tree-replay:focus-visible { outline: 1px solid #738064; outline-offset: 4px; }
+.home-footer { display: flex; justify-content: space-between; align-items: center; }
+.tree-replay {
+  display: block;
+  border: 0;
+  background: none;
+  padding: 0;
+  width: 54px;
+  height: 46px;
+  cursor: pointer;
+  opacity: .85;
+  transition: opacity 180ms;
+}
+.tree-replay:hover { opacity: 1; }
+.tree-replay canvas { width: 54px; height: 42px; display: block; }
+@media (prefers-reduced-motion: reduce) {
+  .intro-pending .page { opacity: 1; animation: none; }
+  .tree-intro, .tree-replay, .tree-skip { transition: none; }
+}

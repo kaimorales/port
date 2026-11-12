@@ -1,6 +1,6 @@
 import {readFileSync,writeFileSync} from 'node:fs';
-import {preset,evaluate,nearest,generation,rng,PHYSICS_VERSION} from '../drive-core.mjs';
-const model=JSON.parse(readFileSync(new URL('../driving-seed.json',import.meta.url)));
+import {preset,evaluate,nearest,generation,rng,PHYSICS_VERSION} from '../../assets/driving/core.mjs';
+const model=JSON.parse(readFileSync(new URL('../../assets/driving/seed.json',import.meta.url)));
 const measure=(track,run)=>{
  let seconds=0,braking=0,accelerating=0,coasting=0;
  for(let i=1;i<run.trace.length;i++){

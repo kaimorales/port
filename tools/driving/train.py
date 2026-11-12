@@ -24,5 +24,5 @@ for epoch in range(180):
  if epoch%30==0:print('epoch',epoch,'mse',round(loss/(len(x)*2),6),flush=True)
 weights=np.concatenate([w1.ravel(),b1,w2.ravel(),b2]).astype(float).tolist()
 model={'version':2,'physicsVersion':source['physicsVersion'],'architecture':source['architecture'],'method':'Behavioral cloning of a conservative preview-curvature controller with direct pedal labels under combined grip limits','examples':len(x),'trainingTracks':source['tracks'],'dataSeed':source['randomSeed'],'trainingSeed':271,'epochs':180,'optimizer':'Adam','learningRate':.0015,'trainingMSE':round(loss/(len(x)*2),6),'outputs':['steering','signed pedal: negative brake, positive throttle, zero coast'],'weights':weights}
-(root.parent/'driving-seed.json').write_text(json.dumps(model,separators=(',',':')))
+(root.parents[1]/'assets/driving/seed.json').write_text(json.dumps(model,separators=(',',':')))
 print('Saved',len(weights),'learned weights. Final training MSE:',round(loss/(len(x)*2),6))

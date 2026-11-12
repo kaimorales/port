@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import * as model from '../pit-model.mjs';
+import * as model from '../assets/pit-wall/model.mjs';
 
 test('one stop costs exactly 20 seconds and every lap contributes to elapsed time', () => {
   assert.equal(typeof model.simulate, 'function');
