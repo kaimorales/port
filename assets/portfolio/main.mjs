@@ -178,6 +178,10 @@ function settle({ commitPanel = true } = {}) {
   document.querySelectorAll('.outgoing-panel').forEach(node => node.remove());
   if (commitPanel) finishPanelSwap();
 }
+function renderedOpacity(node) {
+  const opacity = Number.parseFloat(getComputedStyle(node).opacity);
+  return Number.isFinite(opacity) ? opacity : 1;
+}
 function positions() {
   const nodes = [...panels.get('projects').querySelectorAll('.project-list > li')];
   return new Map(nodes.filter(node => node.getClientRects().length).map(node => [node, node.getBoundingClientRect().top]));
@@ -217,11 +221,15 @@ function navigate(route, { historyMode = 'push', animateChange = motion, focusPr
   const nextSection = route.split('/')[0];
   const sectionChanged = nextSection !== section;
   const changed = route !== current;
+  // Capture the outgoing panel's painted state before settle() finishes its
+  // animations. Finishing a backwards-filled entrance can otherwise make a
+  // half-entered panel flash fully opaque in the outgoing clone.
+  const previous = panels.get(section);
+  const outgoingOpacity = previous && !previous.hidden ? renderedOpacity(previous) : 1;
   const oldAnchor = anchor.getBoundingClientRect();
   const betweenSections = animateChange && section && nextSection && sectionChanged;
   settle({ commitPanel: !betweenSections });
   if (nextSection !== section) {
-    const previous = panels.get(section);
     const next = panels.get(nextSection);
     if (betweenSections) {
       section = nextSection;
@@ -237,7 +245,7 @@ function navigate(route, { historyMode = 'push', animateChange = motion, focusPr
         Object.assign(ghost.style, { position: 'fixed', inset: 'auto', left: `${bounds.left}px`,
           top: `${bounds.top}px`, width: `${bounds.width}px`, zIndex: '1' });
         document.body.append(ghost);
-        animate(ghost, [{ opacity: 1 }, { opacity: 0 }], { duration: 260, easing: 'ease-in-out' });
+        animate(ghost, [{ opacity: outgoingOpacity }, { opacity: 0 }], { duration: 260, easing: 'ease-in-out' });
         setTimeout(() => ghost.remove(), 280);
       }
       previous.hidden = true;
