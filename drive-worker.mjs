@@ -1,4 +1,4 @@
-import {evaluate,generation,rng} from './core.mjs';
+import {evaluate,generation,rng} from './drive-core.mjs';
 let track,weights,random,round=0;
 self.onmessage=({data})=>{
  try{

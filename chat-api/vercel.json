@@ -1,5 +1,0 @@
-{
-  "$schema": "https://openapi.vercel.sh/vercel.json",
-  "outputDirectory": "public",
-  "functions": {"api/chat.mjs": {"maxDuration": 30, "includeFiles": "{identity,personality,voice}.md", "excludeFiles": "{context.md,.env,.env.*}"}}
-}

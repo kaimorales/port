@@ -1,6 +1,5 @@
 /* Shared typography, page layouts, links, and social icons. Homepage styles live in assets/home/. */
 :root {
-  scrollbar-gutter: stable;
   color-scheme: light;
   --paper: #fff;
   --ink: #30332f;

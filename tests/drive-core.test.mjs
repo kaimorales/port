@@ -1,8 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
-import * as core from '../assets/driving/core.mjs';
-import {preset,makeTrack,pointAt,network,PARAMS,randomWeights,evaluate,generation,rng} from '../assets/driving/core.mjs';
+import * as core from '../drive-core.mjs';
+import {preset,makeTrack,pointAt,network,PARAMS,randomWeights,evaluate,generation,rng} from '../drive-core.mjs';
 test('track geometry wraps and rejects invalid input',()=>{
  const t=preset(2);const p=pointAt(t,0),q=pointAt(t,t.length);
  assert.deepEqual(p,q);assert.ok(t.length>280);
@@ -23,7 +23,7 @@ test('a car that never steers leaves a curved track',()=>{
  assert.ok(result.fraction<.5);
 });
 test('pretrained driver completes at least eight of ten held-out circuits',()=>{
- const model=JSON.parse(readFileSync(new URL('../assets/driving/seed.json',import.meta.url)));
+ const model=JSON.parse(readFileSync(new URL('../driving-seed.json',import.meta.url)));
  assert.equal(model.weights.length,PARAMS);assert.equal(model.physicsVersion,core.PHYSICS_VERSION);
  assert.deepEqual(model.architecture,[core.INPUTS,core.HIDDEN,2]);
  const results=Array.from({length:10},(_,i)=>evaluate(preset(1001+i),model.weights,false));
@@ -36,7 +36,7 @@ test('evolution preserves the incumbent and is deterministic for a fixed seed',(
 });
 
 test('a generation exposes every actual attempt and its selected survivor',()=>{
- const model=JSON.parse(readFileSync(new URL('../assets/driving/seed.json',import.meta.url)));
+ const model=JSON.parse(readFileSync(new URL('../driving-seed.json',import.meta.url)));
  const track=preset(2),weights=model.weights.slice(),original=weights.slice();
  const next=generation(track,weights,rng(731),16);
  assert.equal(next.attempts.length,16);
@@ -105,7 +105,7 @@ test('observations include enough preview for braking and traces contain finite 
 });
 
 test('the pretrained direct-pedal policy actually brakes and accelerates on a held-out circuit',()=>{
- const model=JSON.parse(readFileSync(new URL('../assets/driving/seed.json',import.meta.url)));
+ const model=JSON.parse(readFileSync(new URL('../driving-seed.json',import.meta.url)));
  const run=evaluate(preset(1001),model.weights);
  assert.ok(run.completed);
  assert.ok(run.trace.some(sample=>sample.pedal<-.1&&sample.acceleration<0));

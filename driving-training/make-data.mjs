@@ -1,4 +1,4 @@
-import {preset,rng,pointAt,observe,teacher,stepVehicle,nearest,DT,INPUTS,HIDDEN,PHYSICS_VERSION} from '../../assets/driving/core.mjs';
+import {preset,rng,pointAt,observe,teacher,stepVehicle,nearest,DT,INPUTS,HIDDEN,PHYSICS_VERSION} from '../drive-core.mjs';
 import {writeFileSync} from 'node:fs';
 const random=rng(482),rows=[];
 let completed=0;
